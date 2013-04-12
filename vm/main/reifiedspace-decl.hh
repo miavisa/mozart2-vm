@@ -94,7 +94,7 @@ public:
     return &_space->getCstSpace();
   }
 
-  void changeConstraintSpace(RichNode self, VM vm, GecodeSpace gs) {
+  void changeConstraintSpace(RichNode self, VM vm, GecodeSpace* gs) {
     return _space->changeCstSpace(gs);
   }
 #endif

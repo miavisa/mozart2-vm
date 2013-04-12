@@ -25,8 +25,10 @@ public:
 			  GecodeSpace* gs = ConstraintSpace(space).constraintSpace(vm);
 			  GecodeSpace* aux = (GecodeSpace*)gs->clone();
 			  Gecode::DFS<GecodeSpace> e(aux);
+			  GecodeSpace *sol = e.next();
+			  //gs = (GecodeSpace*) sol->clone(false);
+			  ConstraintSpace(space).changeConstraintSpace(vm, sol);
 			  std::cout << "prop gs in builtin: " << gs->propagators() << std::endl;
-			  *gs = *e.next();
 			  std::cout << "memoria gs in builtin: " << gs << std::endl;
 			  std::cout << "memoria aux in builtin: " << aux << std::endl;
 			  std::cout << "status gs in builtin: " << gs->status() << std::endl;
