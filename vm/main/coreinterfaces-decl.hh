@@ -763,7 +763,11 @@ struct Interface<ConstraintSpace>:
     return false;
   }
 
-  GecodeSpace& constraintSpace(RichNode self, VM vm) {
+  GecodeSpace* constraintSpace(RichNode self, VM vm) {
+    raiseTypeError(vm, MOZART_STR("ConstraintSpace"), self);
+  }
+
+  void changeConstraintSpace(RichNode self, VM vm, GecodeSpace gs) {
     raiseTypeError(vm, MOZART_STR("ConstraintSpace"), self);
   }
 };

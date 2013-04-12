@@ -132,6 +132,7 @@ UnstableNode ReifiedSpace::askSpace(RichNode self, VM vm) {
     int gecodeStatus=-1;
     if(space->hasConstraintSpace()){
       //Propagate the constraint space associated to this mozart space
+      std::cout << "M Fuera Builtin: " << &space->getCstSpace() << std::endl;
       gecodeStatus = (space->getCstSpace()).propagate();
       //if the mozart space is failed, then return failed (failed space is strongest than distributable space?)
       if (gecodeStatus == 0){//failed space return immediately.

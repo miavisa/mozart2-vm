@@ -19,14 +19,20 @@ public:
 	public:
 		DFS(): Builtin("dfs") {}
 
-	    static void call(VM vm, In space, Out result) {
+	    static void call(VM vm, In space) {
 			if(ConstraintSpace(space).isConstraintSpace(vm)) { 
-				GecodeSpace& gs = ConstraintSpace(space).constraintSpace(vm);
-				Gecode::DFS<GecodeSpace> e(&gs);
-				GecodeSpace *sol = e.next();
-				//gs = sol;
+			  //result = SpaceLike(space).cloneSpace(vm);
+			  GecodeSpace* gs = ConstraintSpace(space).constraintSpace(vm);
+			  GecodeSpace* aux = (GecodeSpace*)gs->clone();
+			  Gecode::DFS<GecodeSpace> e(aux);
+			  std::cout << "prop gs in builtin: " << gs->propagators() << std::endl;
+			  *gs = *e.next();
+			  std::cout << "memoria gs in builtin: " << gs << std::endl;
+			  std::cout << "memoria aux in builtin: " << aux << std::endl;
+			  std::cout << "status gs in builtin: " << gs->status() << std::endl;
+			  std::cout << "status aux in builtin: " << aux->status() << std::endl;
 
-				//result = SpaceLike(space).cloneSpace(vm);
+					
 			}
 
 		}
